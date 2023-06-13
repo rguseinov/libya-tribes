@@ -16,7 +16,7 @@ Badr;Tripolitania;Nalut;Alseaan;32,016667;11,5;18693;0;0;0;0;0;85;-12,54;14,04
 Benghazi;Cyrenaica;Benghazi;Al-'Awaqir;32,11486;20,06859;667000;840;1;1;2;1;79,9;36,67;-12,58
 Beni Valid;Tripolitania;Misurata;Warfalla;31,74554;13,98354;50000;0;1;1;0;0;83,4;19,55;-18,42
 Bin Jawad;Tripolitania;Sirt;Al-Fawaqir;30,80093885;18,08611339;8488;230;0;0;1;1;73;-14,76;-19,46
-Bir al-Ghanam;Tripolitania;Zawia;Zawiya;32,3113174;12,56766187;3375;0;1;1;0;0;75,5;4,65;14,93
+Bir al-Ghanam;Tripolitania;Zawia;Karaghala;32,3113174;12,56766187;3375;0;1;1;0;0;75,5;4,65;14,93
 Birak;Fezzan;Wadi al Shatii;Warfalla;27,54956;14,27139;40000;0;1;1;0;0;88,4;-18,53;12,77
 Brega;Cyrenaica;Al Wahat;Al-Fawaqir;30,40624;19,57386;20000;21;2;1;1;1;78;-9,62;-10,89
 Derna;Cyrenaica;Derna;Al-Shahaibat (Al-Ubaidat);32,76704;22,63669;150000;2;2;1;2;1;88,9;-6,58;-0,79
@@ -34,8 +34,8 @@ Harawa;Tripolitania;Sirt;Al-Qaddafa;31,0557981;17,29978562;2600;0;0;0;0;0;78,3;-
 Hun;Fezzan;Jufra;Al-Hawana;29,12684;15,94772;30715;0;0;0;0;0;93,7;-13,41;22,61
 Jadu;Tripolitania;Al Gabal Al Gharbi;Amazigh;31,95506;12,02901;6013;0;2;1;2;1;78,5;0,12;1,02
 Jalu;Cyrenaica;Al Wahat;Zuwaya (Al-Ubaidat);29,03333;21,55;3334;0;2;1;2;1;70;-9,62;-10,89
-Janzur;Tripolitania;Tripoli;Warshfana;32,7835281;12,9665821;88073;0;1;1;1;1;84,7;77,62;-6,36
-Joudaim;Tripolitania;Zawia;Zawiya;31,95506;12,02901;12000;0;1;1;0;0;78,3;4,65;14,93
+Janzur;Tripolitania;Tripoli;Warshfana;32,7835281;12,9665821;88073;0;0;0;1;1;84,7;77,62;-6,36
+Joudaim;Tripolitania;Zawia;Karaghala;31,95506;12,02901;12000;0;1;1;0;0;78,3;4,65;14,93
 Jumayl;Tripolitania;Nikhat Al Khams;Al-Nwail;32,85286;12,0612;102000;0;0;0;0;0;83;6,69;22,27
 Khoms;Tripolitania;Al Margheb;Karaghala;32,64861;14,26191;88000;0;1;1;0;0;83,2;9,37;-8,19
 Kufra;Cyrenaica;Al Kufra;Zuwaya (Al-Ubaidat);24,1310195;23,26345712;69000;0;2;1;2;1;102;-20,29;-18,63
@@ -63,7 +63,7 @@ Sirte;Tripolitania;Sirt;Al-Qaddafa;31,20892;16,58866;80000;22;0;0;0;0;78,3;-14,7
 Sokna;Fezzan;Jufra;Al-Ashraf;29,066944;15,784722;9800;0;0;0;0;0;90;-13,41;22,61
 Surman;Tripolitania;Zawia;Amazigh;32,75668;12,57159;36707;0;2;1;0;0;78,3;4,65;14,93
 Tajura;Tripolitania;Tripoli;Karaghala;32,88167;13,35056;100000;0;1;1;0;0;84;77,62;-6,36
-Tarhuna;Tripolitania;Al Margheb;Tarhuna;32,43501;13,6332;51000;0;0;0;0;0;86,2;9,37;-8,19
+Tarhuna;Tripolitania;Al Margheb;Tarhuna;32,43501;13,6332;51000;0;1;1;0;0;86,2;9,37;-8,19
 Tawergha;Tripolitania;Misurata;Karaghala;32,01442718;15,05083841;24223;0;1;1;1;1;78,3;19,55;-18,42
 Tazerbu;Cyrenaica;Al Kufra;Toubou;25,664303;21,045261;6600;0;2;1;2;1;102;-20,29;-18,63
 Tmassa;Fezzan;Mursuq;Toubou;26,39525725;15,78414552;500;0;2;1;0;0;93;-17,6;2,25
@@ -74,7 +74,7 @@ Umm al Rizam;Cyrenaica;Derna;Al-Ubaidat;32,5325;23,005278;12000;0;2;1;2;1;88,9;-
 Waddan;Fezzan;Jufra;Al-Ashraf;29,1614;16,13904;27590;0;0;0;0;0;93,7;-13,41;22,61
 Yafran;Tripolitania;Al Gabal Al Gharbi;Amazigh;32,06329;12,52859;54000;0;2;1;2;1;78,5;0,12;1,02
 Zaltan;Tripolitania;Nikhat Al Khams;Amazigh;32,94699;11,86668;17700;0;2;1;0;0;83;6,69;22,27
-Zawia;Tripolitania;Zawia;Zawiya;32,75222;12,72778;200000;151;1;1;2;1;78,3;4,65;14,93
+Zawia;Tripolitania;Zawia;Karaghala;32,75222;12,72778;200000;151;1;1;2;1;78,3;4,65;14,93
 Zintan;Tripolitania;Al Gabal Al Gharbi;Al-Zintan;31,93155;12,25291;16000;3;1;1;2;1;78,5;0,12;1,02
 Zliten;Tripolitania;Al Margheb;Zuwaya (Al-Ubaidat);32,46739;14,56874;158000;0;2;1;0;0;80,8;9,37;-8,19
 Zuwara;Tripolitania;Nikhat Al Khams;Amazigh;32,9312;12,08199;76000;8;2;1;1;1;83;6,69;22,27
