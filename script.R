@@ -8,30 +8,32 @@
 #install.packages('mediation')
 #install.packages('DiagrammeR')
 #install.packages('glue')
+#install.packages('effects')
 
-#library(tidyverse)
-#library(stargazer)
-#library(caret)
-#library(bruceR)
-#library(pROC)
-#library(geojsonio)
-#library(ggrepel)
-#library(mediation)
-#library(DiagrammeR)
-#library(glue)
+library(tidyverse)
+library(stargazer)
+library(caret)
+library(bruceR)
+library(pROC)
+library(geojsonio)
+library(ggrepel)
+library(mediation)
+library(DiagrammeR)
+library(glue)
+library(effects)
 
 ## Princtipal component analysis
-# choose variables and compute  principal components
+#choose variables and compute  principal components
 small <- regdiv %>% dplyr::select(-c('district', 'reg', 'waterperc', 'roomperc', 'lightperc', 'sewperc', 'cookperc', 'atersorceperc', 'unemployment'))
 pca <- prcomp(small, center = TRUE, scale = TRUE)
 small2 <- predict(pca, newdata = small)
 with_pc <- cbind(regdiv[1:2], small2[, 1:2])
 
-# getting the index
+#computing the index
 with_pc$index1 = round(-10 * with_pc$PC1, 2)
 with_pc$index2 = round(10 * with_pc$PC2, 2)
 
-# scaling the index
+#scaling the index
 with_pc$index1norm = scaler(with_pc$index1, min = 0, max = 100)
 with_pc$index2norm = scaler(with_pc$index2, min = 0, max = 100)
 
@@ -81,23 +83,30 @@ model2 <- glm(tribe_oppose_binary ~ index1norm + index2norm, data = libya_data, 
 model3 <- glm(tribe_oppose_binary ~ index1norm + index2norm + pop_tot, data = libya_data, family = binomial())
 model4 <- glm(tribe_oppose_binary ~ index1norm + index2norm + pop_tot + longforregr, data = libya_data, family = binomial())
 
-# without Tripoli, Benghazi and Sebha
+#without Tripoli, Benghazi and Sebha
 libya_data2 = libya_data[-c(15, 56, 71), ]
 model5 <- glm(tribe_oppose_binary ~ index1norm + index2norm + pop_tot + longforregr, data = libya_data2, family = binomial())
 
-# Regression output
+#Regression output
 stargazer(model1, model2, model3, model4, model5, type = 'text',
           title="Проверка гипотезы №1",
           dep.var.labels=c("Оппозиционность племени"),
           covariate.labels=c("PC1","PC2", 'Индекс прод. цен', 'Численность населения (log)', 'Долгота'))
 
+#Visualise the results
+plot(Effect(focal.predictors = c("index2norm"), model2), 
+     main = 'Визуализация результатов проверки гипотезы №1:
+вторая модель',
+     axes=list(x=list(index2norm=list(lab="Вторая главная компонента")),
+               y=list(lab="Вероятность оппозиционности племени")),
+     confint = list(style="lines"))
 
-# Quality metrics
+#Quality metrics
 a <- predict(model4, libya_data, type = 'response')
 libya_data$opposepred = ifelse(a >= 0.5, 1, 0)
 xtab <- table(libya_data$opposepred, libya_data$tribe_oppose_binary) #get the confusion matrix
 confusionMatrix(xtab, mode = "everything", positive="1") #quality metrics
-# AUC-ROC
+#AUC-ROC
 pred <- prediction(a, libya_data$tribe_oppose_binary)
 auc <- performance(pred, 'auc')
 auc <- unlist(slot(auc,'y.values'))
@@ -110,21 +119,29 @@ model3 <- glm(uprising_control_binary ~ tribe_oppose_ord + pop_tot + death_toll,
 model4 <- glm(uprising_control_binary ~ tribe_oppose_ord + index1norm + index2norm, data = libya_data, family = binomial())
 model5 <- glm(uprising_control_binary ~ tribe_oppose_ord + index1norm + index2norm + latforregr, data = libya_data, family = binomial())
 
-# Regression output
-stargazer(model1, model2, model3, model4, model5, type = 'latex',
+#Regression output
+stargazer(model1, model2, model3, model4, model5, type = 'text',
           title = 'Проверка гипотезы №2',
           dep.var.labels=c("Контроль города силами Каддафи"),
           covariate.labels=c("Оппозиционность племени","Численность населения (log)", 'Людские потери', 'PC1', 'PC2', 'Широта'))
 
-# Quality metrics
+#Visualise the results
+plot(Effect(focal.predictors = c("tribe_oppose_ord"), model4), 
+     main = 'Визуализация результатов проверки гипотезы №2:
+четвертая модель',
+     axes=list(x=list(tribe_oppose_ord=list(lab="Оппозиционность племени")),
+               y=list(lab="Вероятность захвата города")))
+
+#Quality metrics
 a <- predict(model5, libya_data, type = 'response')
 libya_data$opposepred = ifelse(a >= 0.5, 1, 0)
 xtab <- table(libya_data$opposepred, libya_data$uprising_control_binary) #get the confusion matrix
 confusionMatrix(xtab, mode = "everything", positive="1") #quality metrics
-# AUC-ROC
+#AUC-ROC
 pred <- prediction(a, libya_data$uprising_control_binary)
 auc <- performance(pred, 'auc')
 auc <- unlist(slot(auc,'y.values'))
+
 
 ## mediation test
 set.seed(666) #the most metal seed
@@ -138,7 +155,7 @@ results <- mediate(model.M, model.Y, treat='index1norm', mediator='tribe_oppose_
                    boot=TRUE, sims=500)
 summary(results)
 
-## plot mediation output
+##plot mediation output
 data <-
   data.frame(
     lab_x   = "Соц.-экономическое\\nблагополучие",
@@ -197,11 +214,11 @@ diagram <- function(data, height = .75, width = 2, graph_label = NA, node_text_s
 
 diagram(data)
 
-# export diagram to png
+#export diagram to png
 med_diagram(med_data) %>% 
   export_svg %>% charToRaw %>% rsvg_png("graphfin.png")
 
-## plot a map of predicted probabilities
+##plot a map of predicted probabilities
 
 spdf <- geojson_read('https://raw.githubusercontent.com/wmgeolab/geoBoundaries/0be9a3df1e3bff5a106104374c371de2d72c12a4/releaseData/gbOpen/LBY/ADM1/geoBoundaries-LBY-ADM1.geojson', what = "sp")
 fortified <- fortify(spdf, region = "shapeISO")
@@ -215,7 +232,7 @@ ggplot() + geom_polygon(data = fortified, aes(x = long, y = lat, group = group),
        col = 'Оппозиционность\nплемени',
        size = 'Предсказанная\nвероятность')
 
-# plot a map of Libyan tribes
+#plot a map of Libyan tribes
 ggplot() + geom_polygon(data = fortified, aes(x = long, y = lat, group = group),
                         fill = "white", color = "black") + theme_void() + coord_map() +
   geom_point(data = lib_df, aes(x = newlong, y = newlat, col = tribe_name), size = 1.5)+
