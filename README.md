@@ -1,4 +1,6 @@
 # libya-tribes
+"The Influence of the Tribal Factor on the Libyan Revolution in 2011" term paper replication data repository 
+
 Репозиторий с данными для репликации результатов курсовой работы.
 
 **Tribes_description** - таблица с указанием наименований племен, статусом оппозиционности и обоснованием присвоения этого статуса.
